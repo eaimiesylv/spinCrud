@@ -16,10 +16,17 @@ class TaskService
     }
 
     
-    public function createTask(array $all)
+    public function createTask(array $request)
     {
     
-        return $this->taskRepository->createTask($all);
+        return $this->taskRepository->createTask($request);
+       
+    }
+
+    public function updateTask(array $request, $task)
+    {
+    
+        return $this->taskRepository->updateTask($request, $task);
        
     }
     

@@ -19,7 +19,7 @@ class Task extends Model
         'id'
     ];
 
-    protected $hidden =['user_id','id'];
+    protected $hidden =['user_id'];
     protected static function boot()
     {
         parent::boot();

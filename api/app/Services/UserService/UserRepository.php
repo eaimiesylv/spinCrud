@@ -2,6 +2,7 @@
 
 namespace App\Services\UserService;
 use App\Models\User;
+use Illuminate\Database\QueryException;
 
 
 
@@ -21,8 +22,14 @@ class UserRepository
 
     public function createUser(array $data)
     {
+        try {
       
-        return User::Create($data);
+             return User::Create($data);
+             
+        } catch (QueryException $exception) {
+
+            return response()->json(['message' => 'Insertion failed.'], 500);
+        }
     }
 
    
