@@ -43,6 +43,15 @@ class UserTest extends TestCase
     public function test_user_can_login(): void
     {
 
+        $user = User::create($this->user);
 
+        $loginData = [
+            'email' => 'user@gmail.com',
+            'password' => 'Password',
+        ];
+    
+        $response = $this->post('api/v1/login', $loginData);
+    
+        $response->assertStatus(200);
     }
 }
