@@ -12,11 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('tasks', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id',32)->primary();
             $table->string('name', 55);
             $table->string('description', 200);
-            $table->date('start_date');
-            $table->date('end_date');
+            $table->date('start_time');
+            $table->date('end_time');
+            $table->uuid('user_id', 32)->index();
+            $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }

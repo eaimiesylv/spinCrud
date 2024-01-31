@@ -1,28 +1,19 @@
 <?php
 
-namespace App\Services\UserService;
-use App\Models\User;
+namespace App\Services\TaskService;
+use App\Models\Task;
 
 
 
-class UserRepository
+class TaskRepository
 {
    
-    public function getUserByEmail($email){
+    
 
-        return  User::where('email', $email)->first();
-
-    }
-    public function authenticateUser(array $request)
+    public function createTask(array $data)
     {
-        return $this->getUserByEmail($request['email']);
-        
-    }
-
-    public function createUser(array $data)
-    {
-      
-        return User::Create($data);
+       
+        return Task::Create($data);
     }
 
    

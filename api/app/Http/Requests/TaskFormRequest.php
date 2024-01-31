@@ -15,8 +15,8 @@ class TaskFormRequest extends FormRequest
         return [
             'name'=>'required|max:50',
             'description' => 'required|string|max:200',
-            'start_date' => 'required|date',
-            'end_date' => 'required|date',
+            'start_time' => 'required|date',
+            'end_time' => 'required|date',
         
         ];
     }

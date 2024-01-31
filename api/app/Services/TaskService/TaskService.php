@@ -1,25 +1,25 @@
 <?php
 
-namespace App\Services\UserService;
-use App\Services\UserService\UserRepository;
+namespace App\Services\TaskService;
+use App\Services\TaskService\TaskRepository;
 
 
-class UserService
+class TaskService
 {
-    protected UserRepository $userRepository;
+    protected TaskRepository $taskRepository;
     
 
-    public function __construct(UserRepository $userRepository)
+    public function __construct(TaskRepository $taskRepository)
     {
-        $this->userRepository = $userRepository;
+        $this->taskRepository = $taskRepository;
 
     }
 
     
-    public function createUser(array $all)
+    public function createTask(array $all)
     {
     
-        return $this->userRepository->createUser($all);
+        return $this->taskRepository->createTask($all);
        
     }
     
