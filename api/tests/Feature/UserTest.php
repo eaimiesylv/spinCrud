@@ -17,6 +17,7 @@ class UserTest extends TestCase
             'name' => 'Test user',
             'email' => 'user@gmail.com',
             'password' => 'password123',
+            'password_confirmation'=>'password123'
         ];
 
         $response = $this->post('api/user', $userData);
@@ -25,7 +26,6 @@ class UserTest extends TestCase
 
         $user = User::where('email', 'user@gmail.com')->first();
 
-        // Use assertCredentials to validate the user's credentials
         $this->assertCredentials([
             'email' => 'user@gmail.com',
             'password' => 'password123',
