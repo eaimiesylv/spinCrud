@@ -29,11 +29,9 @@ class UserTest extends TestCase
 
     public function test_user_can_register(): void
     {
-        $response = $this->post('api/v1/user', $this->user);
+        $response = $this->post('api/v1/users', $this->user);
 
         $response->assertStatus(201);
-
-        $user = User::where('email', 'user@gmail.com')->first();
 
         $this->assertCredentials([
             'email' => 'user@gmail.com',
