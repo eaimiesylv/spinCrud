@@ -16,18 +16,16 @@ class AuthService
 
     }
 
+    private function passwordValidation($inputPassword, $savedPassword){
+
+        return Hash::check($inputPassword, $savedPassword);     
+    }
     
     public function authenticateUser(array $request)
     {
-    
+       
         $user = $this->userRepository->authenticateUser($request);
-        if(!Hash::check($request['password'], $user->password)){
-                   
-                   
-            return ['Wrong Credentials'];
-       } 
-        return [$user->createToken('api-token')->plainTextToken, $user];
-      
+        return $this->passwordValidation($request['password'], $user->password) ? [$user->createToken('api-token')->plainTextToken, $user]: [];
        
     }
     
