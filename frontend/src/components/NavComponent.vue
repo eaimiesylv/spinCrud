@@ -4,7 +4,7 @@
     <nav>
       <img src="@/assets/logo.jpg" alt="Task Scheduler" class="img"/>
       <hr>
-      <router-link to="/">
+      <router-link to="/dashboard">
         <i class="fas fa-home"></i> Dashboard
       </router-link>
 

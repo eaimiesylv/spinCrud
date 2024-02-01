@@ -1,19 +1,10 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Dashboard from '../views/UserDashboard.vue'
 import IndexPage from '../views/IndexPage.vue'
+import useAuthStore from '../store';
 
 
-const Roles = {
-  admin:3,
-  classteacher:2,
-  staff:1,
-  student:0,
-};
 
-function hasRole(userRole, requiredRole) {
- 
-  return userRole === requiredRole;
-}
 
 
 const routes = [
@@ -27,7 +18,7 @@ const routes = [
     name: 'dashboard',
     component:Dashboard,
     meta: {
-      role:Roles.student, // Specify the required role for the route
+      requiresAuth: true,
     },
   },
   {
@@ -67,23 +58,25 @@ const router = createRouter({
 })
 
 
-// Navigation guard
+  
+  // Navigation guard
 router.beforeEach((to, from, next) => {
-  const requiredRole = to.meta.role; // Get the required role from the route's meta data
-  //alert(localStorage.getItem('token'));
-  const role =localStorage.getItem('role');
-  const userRole = Number(atob(role));
-  
-  //const userRole = getUserRole(); // Get the user's role from wherever you store it (e.g., Vuex store, local storage)
+  const requiresAuth = to.meta.requiresAuth;
 
-  if (requiredRole && !hasRole(userRole, requiredRole)) {
-  
-    // User doesn't have the required role, redirect to a different page or show an error message
-    next({ path: '/forbidden'}); 
-  } else {
-    
-    // User has the required role, proceed to the next route
-    next();
-  }
+      // Check if the route requires authentication
+      if (requiresAuth) {
+        const isUserLoggedIn = useAuthStore().token !== null;
+
+        // If user is not logged in, redirect to login page
+        if (!isUserLoggedIn) {
+          next({ path: '/forbidden' });
+        } else {
+          // User is logged in, proceed to the next route
+          next();
+        }
+      } else {
+        // Route does not require authentication, proceed to the next route
+        next();
+      }
 });
 export default router
