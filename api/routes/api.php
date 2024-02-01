@@ -15,6 +15,6 @@ Route::group(['prefix'=>'v1'], function(){
 // protected route
 Route::middleware('auth:sanctum')->group(function() {
   
-    route::resource('v1/tasks', App\Http\Controllers\Task\TaskController::class);
+    route::resource('v1/tasks', App\Http\Controllers\Task\TaskController::class)->only('index','show','store','update','destroy');
    
 });

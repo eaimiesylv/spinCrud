@@ -39,9 +39,20 @@ class TaskRepository
             return response()->json(['message' => 'Task not found.'], 404);
         }
       
-       
+    }
 
-       
+    public function deleteTask(array $request, $task)
+    {
+        try{
+
+             $task->delete($request);
+             return $task;
+        }
+       catch (QueryException $exception){
+        
+            return response()->json(['message' => 'Task not found.'], 404);
+        }
+      
     }
 
    
