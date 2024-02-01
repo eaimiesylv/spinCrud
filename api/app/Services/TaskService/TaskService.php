@@ -15,6 +15,13 @@ class TaskService
 
     }
 
+    public function getAllTask()
+    {
+    
+        return $this->taskRepository->getAllTask();
+       
+    }
+
     
     public function createTask(array $request)
     {

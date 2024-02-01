@@ -9,7 +9,11 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class TaskRepository
 {
-   
+   public function getAllTask(){
+
+        return Task::paginate(20);
+
+   }
     
 
     public function createTask(array $data)

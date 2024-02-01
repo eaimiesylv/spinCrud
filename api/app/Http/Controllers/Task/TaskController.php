@@ -17,6 +17,12 @@ class TaskController extends Controller
         $this->taskService = $taskService;
 
     }
+    public function index()
+    { 	
+        
+            return $this->taskService->getAllTask();
+        
+    }
    
     public function store(TaskFormRequest $request)
     { 	
