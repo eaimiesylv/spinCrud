@@ -74,4 +74,14 @@ class TaskTest extends TestCase
             'end_time' => $createdTask->end_time,
         ]);
     }
+    public function test_that_a_user_can_delete_a_task(): void
+    {
+        $createdTask = Task::factory()->create($this->task);
+
+        $response = $this->deleteJson('/api/v1/tasks/'.$createdTask->id);
+
+        $response->assertStatus(200);
+
+        $this->assertDatabaseMissing('tasks', $this->task);
+    }
 }

@@ -35,7 +35,7 @@ class TaskController extends Controller
            return $this->taskService->updateTask($request->all(), $task);
         
     }
-    public function destroy(TaskFormRequest $request, Task $task)
+    public function destroy(Request $request, Task $task)
     { 	
            return $this->taskService->deleteTask($request->all(), $task);
         
