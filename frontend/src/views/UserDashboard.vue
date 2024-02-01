@@ -5,7 +5,7 @@
     <!--nav element-->
     <NavComponent />
     <!--main element--> 
-    {{  user.user }}
+    
     <main>
       <HeaderComponent />
       
@@ -16,7 +16,7 @@
 <script>
 import NavComponent from "@/components/NavComponent.vue";
 import HeaderComponent from "@/components/HeaderComponent.vue";
-import useAuthStore from '../store';
+
 
 
 export default {
@@ -24,17 +24,8 @@ export default {
   components:{
     NavComponent,
     HeaderComponent
-  },
-  data(){
-     return{
-        user:''
-    }
-  },
-  mounted(){
-  
-    this.user = useAuthStore();
-    console.log(this.user)
   }
+  
 }
 </script>
 

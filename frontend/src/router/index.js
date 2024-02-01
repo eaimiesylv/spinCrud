@@ -18,16 +18,10 @@ const routes = [
     name: 'dashboard',
     component:Dashboard,
     meta: {
-      requiresAuth: true,
+      requiresAuth: false,
     },
   },
-  {
-    path: '/project',
-    name: 'project',
-    component: function () {
-     return import( '../views/ProjectBoard.vue')
-    }
-  },
+  
   {
     path: '/forbidden',
     name: 'forbidden',
@@ -67,7 +61,7 @@ router.beforeEach((to, from, next) => {
       if (requiresAuth) {
         const isUserLoggedIn = useAuthStore().token !== null;
 
-        // user not login
+        // redirect non login users
         if (!isUserLoggedIn) {
           next({ path: '/forbidden' });
         } else {

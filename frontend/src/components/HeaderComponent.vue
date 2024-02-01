@@ -1,6 +1,8 @@
 
 
 <template>
+       
+     
      <header>
           <i class="fas fa-bars"  @click="toggleNav"></i>
           <div class="input-group">
@@ -9,14 +11,17 @@
           </div>
           
      </header>
+     
   </template>
   
   <script>
+  import useAuthStore from '../store';
   export default {
     name: 'HeaderComponent',
     data() {
     return {
       isNavOpen: true,
+      user:''
 
     };
   },
@@ -37,9 +42,12 @@
 
     },
   },
+ 
   mounted() {
    
     this.checkNavOpenClass();
+    this.user = useAuthStore().user;
+    console.log(this.user)
 
   }
 }

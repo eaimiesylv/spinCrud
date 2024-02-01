@@ -1,4 +1,6 @@
 import { defineStore } from 'pinia'
+import router from '../router'
+import api from '../axios';
 
 const useAuthStore = defineStore({
     id: 'login_id',
@@ -29,10 +31,21 @@ const useAuthStore = defineStore({
             this.updateLocalStorage();
         },
 
-        logout() {
-            this.token = null;
-            this.user = {};
-            this.updateLocalStorage();
+        async logout() {
+            try {
+                const response = await api.post('log-out');
+                if(response && (response.status === 200)){
+                    console.log('logout')
+                    this.token = null;
+                    this.user = {};
+                    this.updateLocalStorage();
+                    router.push('/');
+                }
+                
+              } catch (error) {
+                console.log(error);
+              }
+           
         },
 
         updateLocalStorage() {

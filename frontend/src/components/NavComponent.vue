@@ -1,19 +1,14 @@
-
-
 <template>
     <nav>
       <img src="@/assets/logo.jpg" alt="Task Scheduler" class="img"/>
-      <hr>
+      
+      <hr style="color:red">
+     
       <router-link to="/dashboard">
         <i class="fas fa-home"></i> Dashboard
       </router-link>
 
-      <router-link to="/project">
-        <i class="fas fa-tasks"></i> Projects
-      </router-link>
-
-
-      <router-link to="/logout">
+      <router-link to="/logout"  @click="logout">
         <i class="fas fa-sign-out-alt"></i> Log Out
       </router-link>
 
@@ -21,8 +16,14 @@
   </template>
   
   <script>
+  import useAuthStore from '../store';
   export default {
     name: 'NavComponent',
+    methods: {
+    logout() {
+      useAuthStore().logout();
+    },
+  },
   }
   </script>
   
