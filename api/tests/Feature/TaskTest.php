@@ -59,4 +59,19 @@ class TaskTest extends TestCase
 
         $this->assertDatabaseHas('tasks', $updatedTaskData);
     }
+
+    public function test_that_a_user_can_read_a_task(): void
+    {
+        $createdTask = Task::factory()->create($this->task);
+
+        $response = $this->getJson('/api/v1/tasks/');
+
+        $response->assertStatus(200)
+        ->assertJsonFragment([
+            'name' => $createdTask->name,
+            'description' => $createdTask->description,
+            'start_time' => $createdTask->start_time,
+            'end_time' => $createdTask->end_time,
+        ]);
+    }
 }
