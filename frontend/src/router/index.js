@@ -67,15 +67,15 @@ router.beforeEach((to, from, next) => {
       if (requiresAuth) {
         const isUserLoggedIn = useAuthStore().token !== null;
 
-        // If user is not logged in, redirect to login page
+        // user not login
         if (!isUserLoggedIn) {
           next({ path: '/forbidden' });
         } else {
-          // User is logged in, proceed to the next route
+          
           next();
         }
       } else {
-        // Route does not require authentication, proceed to the next route
+        // un protected route
         next();
       }
 });

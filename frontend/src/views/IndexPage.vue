@@ -29,7 +29,7 @@ export default {
   name: 'IndexPage',
   data() {
     return {
-      email: 'test@gmail.com',
+      email: '',
       password: 'test*1234',
     };
   },
@@ -45,7 +45,7 @@ export default {
             const token = response.data[0];
             const user = response.data[1];
             useAuthStore().setAuthData({ token, user });
-            this.$router.push('/project');
+            this.$router.push('/dashboard');
         }
         
       } catch (error) {
