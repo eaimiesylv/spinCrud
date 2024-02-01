@@ -41,6 +41,11 @@ class TaskService
     
         return $this->taskRepository->deleteTask($request, $task);
        
+    }public function getTaskById( $task)
+    {
+    
+        return $this->taskRepository->getTaskById($task);
+       
     }
     
     

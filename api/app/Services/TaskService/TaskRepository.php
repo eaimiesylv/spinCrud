@@ -14,7 +14,12 @@ class TaskRepository
         return Task::paginate(20);
 
    }
-    
+   public function getTaskById($task)
+   {
+
+        return $task;
+
+   }
 
     public function createTask(array $data)
     {

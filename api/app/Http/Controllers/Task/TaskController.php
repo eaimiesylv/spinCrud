@@ -23,6 +23,12 @@ class TaskController extends Controller
             return $this->taskService->getAllTask();
         
     }
+    public function show(Task $task)
+    { 	
+        
+            return $this->taskService->getTaskById($task);
+        
+    }
    
     public function store(TaskFormRequest $request)
     { 	
