@@ -8,7 +8,7 @@
         <i class="fas fa-home"></i> Dashboard
       </router-link>
 
-      <router-link to="/logout"  @click="logout">
+      <router-link to="#"  @click="logout">
         <i class="fas fa-sign-out-alt"></i> Log Out
       </router-link>
 
@@ -21,6 +21,7 @@
     name: 'NavComponent',
     methods: {
     logout() {
+  
       useAuthStore().logout();
     },
   },

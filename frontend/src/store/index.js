@@ -19,11 +19,24 @@ const useAuthStore = defineStore({
         }
     },
     actions: {
-        setAuthData({ token, user }) {
-            this.token = token;
-            this.user = user;
-            this.updateLocalStorage();
-        },
+        async login({ email, password }) {
+            try {
+              const response = await api.post('login', { email, password });
+        
+              if (response && response.status === 200) {
+                    this.token = response.data[0];
+                    this.user = response.data[1];
+                    this.updateLocalStorage();
+                    return { success: true, message: 'Login successful' };
+              } else {
+                    return { success: false, message: 'Invalid credentials' };
+              }
+            } catch (error) {
+              console.log(error);
+              return { success: false, message: error};
+            }
+          },
+      
 
         clearAuthData() {
             this.token = null;
@@ -35,7 +48,7 @@ const useAuthStore = defineStore({
             try {
                 const response = await api.post('log-out');
                 if(response && (response.status === 200)){
-                    console.log('logout')
+    
                     this.token = null;
                     this.user = {};
                     this.updateLocalStorage();

@@ -1,6 +1,6 @@
 <template>
   <main>
-    <div class="col-md-6 offset-md-3 mt-3">
+    <div id="main_content" class="col-md-6 offset-md-3 mt-3">
       <img src="@/assets/logo.jpg" class="mx-auto d-block img" alt="Task Scheduler" />
       <form @submit.prevent="login" class="mt-3">
         <div class="mb-3">
@@ -11,18 +11,16 @@
           <label for="exampleInputPassword1" class="form-label">Password</label>
           <input v-model="password" type="password" class="form-control" id="exampleInputPassword1">
         </div>
-        <div class="mb-3 form-check">
-          <input type="checkbox" class="form-check-input" id="exampleCheck1">
-          <label class="form-check-label" for="exampleCheck1">Check me out</label>
-        </div>
+        
         <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary">Register</button>
       </form>
     </div>
   </main>
 </template>
 
 <script>
-import api from '../axios';
+// import api from '../axios';
 import useAuthStore from '../store';
 
 export default {
@@ -35,21 +33,16 @@ export default {
   },
   methods: {
     async login() {
-      try {
-        const response = await api.post('login', {
-          email: this.email,
-          password: this.password,
-        });
-        if(response && (response.status === 200)){
-            console.log(response);
-            const token = response.data[0];
-            const user = response.data[1];
-            useAuthStore().setAuthData({ token, user });
-            this.$router.push('/dashboard');
-        }
-        
-      } catch (error) {
-        console.log(error);
+      const { success, message } = await useAuthStore().login({
+        email: this.email,
+        password: this.password,
+      });
+
+      if (success) {
+        this.$router.push('/dashboard');
+      } else {
+        console.log(message);
+       
       }
     },
   },
@@ -58,6 +51,10 @@ export default {
 
 <style scoped>
   main {
-    background: white;
+    background: #F2F1F9;
+  }
+  #main_content {
+    background: white !important;
+    padding:3em;
   }
 </style>
