@@ -20,9 +20,9 @@ api.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response.status >  202) {
-      // Unauthorized, clear auth data and redirect to login
+    
       // useAuthStore().clearAuthData();
-      // Replace '/login' with your actual login route
+
      alert("no data found")
     }
     return Promise.reject(error);

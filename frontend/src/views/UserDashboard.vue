@@ -5,7 +5,7 @@
     <!--nav element-->
     <NavComponent />
     <!--main element--> 
-    {{  user }}
+    {{  user.user }}
     <main>
       <HeaderComponent />
       
@@ -33,6 +33,7 @@ export default {
   mounted(){
   
     this.user = useAuthStore();
+    console.log(this.user)
   }
 }
 </script>
