@@ -1,45 +1,26 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import DashboardView from '../views/AdminDashboard.vue'
+import DashboardView from '../views/UserDashboard.vue'
+import IndexPage from '../views/IndexPage.vue'
 
 const routes = [
   {
     path: '/',
-    name: 'dashboard',
-    component: DashboardView
+    name: 'home',
+    component: IndexPage
   },
   {
     path: '/projects',
     name: 'projects',
     component: function () {
-      return import( '../views/AdminDashboard.vue')
+      return import( '../views/UserDashboard.vue')
     }
   },
-  {
-    path: '/scheduler',
-    name: 'scheduler',
-    component: function () {
-     return import( '../views/AdminDashboard.vue')
-    }
-  },
-  {
-    path: '/content-wizard',
-    name: 'content-wizard',
-    component: function () {
-     return import( '../views/AdminDashboard.vue')
-    }
-  },
-  {
-    path: '/document',
-    name: 'document',
-    component: function () {
-     return import( '../views/AdminDashboard.vue')
-    }
-  },
+  
   {
     path: '/logout',
     name: 'logout',
     component: function () {
-     return import( '../views/AdminDashboard.vue')
+     return import( '../views/UserDashboard.vue')
     }
   },
   {

@@ -6,10 +6,11 @@
     margin-top: 26px;
     display:flex;
     padding:1.5em 1em;
+    overflow:hidden;
     
   }
-  header :nth-child(3){
-    margin-left: auto !important;
+  header div{
+    flex: 1;
   }
   nav {
     background: #2B2A3F;
@@ -35,7 +36,7 @@
     text-decoration:none;
     padding:0.9em 3em;
     font-size:1.2em;
-     position: relative;
+    position: relative;
     
   }
   nav a:hover{
@@ -46,143 +47,18 @@
   i{
     margin-right:0.6em;
   }
-  input{
-    border:none;
-    height:100%;
-    flex:1;
-    background:#F5F4FA;
-    padding-left:1em;
-  }
+  
   .fa-bars{
-    font-size:25px;
-    margin-top:0.4em;
+    font-size:2em;
+    margin-top:0.1em;
   
   }
-  .input-container{
-    height:45px;
-    width:300px;
-    display:flex;
-  }
-  .input-container div{
-    background:#77AEF4;
-    padding:0.8em;
-    color:white;
-    border-style:2px solid orange;
-  }
-  #headerSetting .fa-arrow-left{
-    background:#77AEF4;
-    color:white;
-    padding:1em;
-    border-radius: 5px;
   
-  }
-  #headerSetting h4{
-    color:#384D67;
-    margin:1.2em 0em;
-   
-  }
-  #headerSetting #wrapper{
-    background:white;
-    padding:2em !important;
-  }
-  #headerSetting label:nth-child(2){
-    color:red;
-  }
   
-  .headersetting-input-container div{
-    display:flex !important;
-    direction:column !important;
-    margin-top: 1em;
-  }
   
-  .headersetting-input-container label:nth-child(3){
-    margin-left:auto !important;
-  }
-  .headersetting-input-container input{
-     margin:1em 0em;
-     padding: 5px;
-     background:white;
-     border:1px solid #E5E5E5;
-     width:100%;
-     height:2rem;
-     border-radius:0.4em;
-  }
-  #core_setting{
-      margin-top:2em;
-    }
-    #core_setting h4{
-      margin:2em 0;
-      color:#384D67;
-    }
-   
-    #coresetting_wrapper {
-      display: flex;
-      justify-content: space-between;
-    }
   
-    .coresetting-input-container {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      margin-bottom: 20px;
-      padding:0em 2em 2em 0em;
-    }
-    .coresetting-input-container select{
-      width: 85%;
-      padding: 8px;
-      margin-bottom: 2em;
-      box-sizing: border-box;
-      border-radius:5px;
-      height:4em;
-    }
+  
     
-  
-    .coresetting-input-container label {
-      display:block;
-      margin-bottom: 0.5em;
-    
-  }
-  
-    #coresetting_article div{
-      display: flex;
-    }
-    #articleSize{
-      flex:1;
-    }
-    #coresetting_details
-    {
-      margin-top:1em;
-    }
-    #coresetting_description
-    {
-      line-height:1.5em;
-      font-size:medium;
-    }
-    #coresetting_article p{
-      background:#90A2B9;
-      max-height:3.3em;
-      box-sizing: border-box;
-      justify-content: center;
-      margin-left:1em;
-      padding:1em
-    }
-    #coresetting_checkbox{
-      display:flex;
-      margin:1em;
-    }
-    #coresetting_comment textarea{
-      margin-top:1em;
-      width:100%;
-      border-radius:3px;
-      padding:10px;
-    }
-    .details {
-      margin-right: 10px;
-    }
-  
-    .pipe {
-      margin: 0 5px;
-    }
   @media screen and (max-width: 767px) {
     nav {
       display: none;

@@ -3,15 +3,9 @@
 <template>
      <header>
           <i class="fas fa-bars"  @click="toggleNav"></i>
-          <div class="input-container">
-            <input type="text" placeholder="My work place"/>
-            <div><i class="fas fa-angle-down"></i></div>
-           
-          </div>
-          <div class="input-container">
-            <input type="text" placeholder="Search here"/>
-            <div>Search</div>
-            
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search Task" aria-label="Recipient's username" aria-describedby="basic-addon2">
+            <span class="input-group-text" id="basic-addon2">Search</span>
           </div>
           
      </header>
