@@ -1,49 +1,39 @@
+
+
 <template>
-  <main>
-    <div class="col-md-6 offset-md-3 mt-3">
-      <img src="@/assets/logo.jpg" class="mx-auto d-block img" alt="Task Scheduler" />
-        <p>Project board</p>
-    </div>
-  </main>
+  <div  id="container">
+    <!--nav element-->
+    <NavComponent />
+    Our Project board
+    <main>
+      <HeaderComponent />
+      
+    </main>
+  </div>
 </template>
 
 <script>
-import api from '../axios';
+import NavComponent from "@/components/NavComponent.vue";
+import HeaderComponent from "@/components/HeaderComponent.vue";
 import useAuthStore from '../store';
+
 
 export default {
   name: 'ProjectBoard',
-  data() {
-    return {
-      email: 'test@gmail.com',
-      password: 'test*1234',
-    };
+  components:{
+    NavComponent,
+    HeaderComponent
   },
-  methods: {
-    async login() {
-      try {
-        const response = await api.post('login', {
-          email: this.email,
-          password: this.password,
-        });
-        if(response && (response.status === 200)){
-            console.log(response);
-            const token = response.data[0];
-            const user = response.data[1];
-            useAuthStore().setAuthData({ token, user });
-            this.$router.push('/dashboard');
-        }
-        
-      } catch (error) {
-        console.log(error);
-      }
-    },
+  data(){
+     return{
+        user:''
+    }
   },
-};
+  mounted(){
+  
+    this.user = useAuthStore();
+    console.log(this.user)
+  }
+}
 </script>
 
-<style scoped>
-  main {
-    background: white;
-  }
-</style>

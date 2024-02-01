@@ -45,7 +45,7 @@ export default {
             const token = response.data[0];
             const user = response.data[1];
             useAuthStore().setAuthData({ token, user });
-            this.$router.push('/dashboard');
+            this.$router.push('/project');
         }
         
       } catch (error) {

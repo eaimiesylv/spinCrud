@@ -8,7 +8,7 @@
         <i class="fas fa-home"></i> Dashboard
       </router-link>
 
-      <router-link to="/projects">
+      <router-link to="/project">
         <i class="fas fa-tasks"></i> Projects
       </router-link>
 

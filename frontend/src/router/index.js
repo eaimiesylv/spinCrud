@@ -11,7 +11,7 @@ const Roles = {
 };
 
 function hasRole(userRole, requiredRole) {
-  // Perform your role validation logic here
+ 
   return userRole === requiredRole;
 }
 
@@ -30,7 +30,20 @@ const routes = [
       role:Roles.student, // Specify the required role for the route
     },
   },
-  
+  {
+    path: '/project',
+    name: 'project',
+    component: function () {
+     return import( '../views/ProjectBoard.vue')
+    }
+  },
+  {
+    path: '/forbidden',
+    name: 'forbidden',
+    component: function () {
+     return import( '../views/NotLogin.vue')
+    }
+  },
   {
     path: '/logout',
     name: 'logout',
