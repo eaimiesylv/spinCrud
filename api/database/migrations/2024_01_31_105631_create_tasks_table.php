@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('description', 200);
             $table->date('start_time', 12);
             $table->date('end_time',12);
-            $table->string('status', 10)->default('pending');
+            $table->string('task_status', 10)->default('pending');
             $table->uuid('user_id', 32)->index();
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();

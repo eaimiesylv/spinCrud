@@ -64,7 +64,8 @@ const login = async () => {
       router.push('/dashboard');
     } else {
       error.value = true;
-      error_msg.value = response.response.data.message;
+      error_msg.value = response.response?.data?.message || response.message;
+
     }
   } finally {
     loading.value = false;

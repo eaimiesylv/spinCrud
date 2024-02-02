@@ -30,7 +30,6 @@
 
                       <button type="submit" class="btn btn-primary" :disabled="loading">{{ loading ? 'Please wait...' : 'Submit' }}</button>
 
-                      <h6 @click="redirectToRegister">Create an account</h6>
                     </div>
               </form>
             </div>

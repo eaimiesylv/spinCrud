@@ -11,7 +11,7 @@
 
   import CreateTaskComponent from "@/components/task/CreateTaskComponent.vue";
   import ReadTaskComponent from "@/components/task/ReadTaskComponent.vue";
-  
+ 
 
 </script>
 
