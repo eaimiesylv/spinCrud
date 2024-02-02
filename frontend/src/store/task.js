@@ -23,12 +23,13 @@ const useTaskStore = defineStore({
     
             if (response.status === 200) {
               this.tasks = response.data;
-              return { response: this.tasks};
+              
+                return { success: true, res: this.tasks };
             } else {
-              // Handle error
+                return { success: false, res: 'Login successful' };
             }
           } catch (error) {
-            // Handle error
+            return { success: false, res: error };
           }
         },
       },

@@ -119,59 +119,27 @@
   const getTask = async (page) => {
       page = pageNo(page);
       //console.log(response)
-      const res = await useTaskStore().fetchTask(page);
-      console.log(res.response.data);
-      tasks.value = res.response.data;
-      links.value = res.response.links;
-      itemsPerPage.value = res.response.per_page; // record per page
-      currentPage.value = res.response.current_page; // current page no
-      totalPage.value = res.response.total; // total pages
+      const { success, res } = await useTaskStore().fetchTask(page);
+      if (success) {
+        
+        console.log(res);
+        tasks.value = res.data;
+        links.value = res.links;
+        itemsPerPage.value = res.per_page; // record per page
+        currentPage.value = res.current_page; // current page no
+        totalPage.value = res.total; // total pages
+      }
+      else {
+      err.value = true;
+     error_msg.value = res.data?.message || res.message;
+
+    }
 };
 
 onMounted(async (page = 1) => {
   getTask(page);
 });
-  // const getTask = async(page)=>{
-  //    page = pageNo(page);
-  //    response.value=useTaskStore.fetchTask(page);
-  //    console.log(response.value);
-  //    tasks.value= response.value.data.data;
-  //     links.value= response.value.data.links;
-  //     itemsPerPage.value=response.value.data.per_page; // record per page
-  //     currentPage.value = response.value.data.current_page; // current page no
-  //     totalPage.value = response.value.data.total; // total pages
-  //   // try {
-  //   //           response.value = await api.get('tasks',{
-
-  //   //             params:{page}
-  //   //           });
-        
-  //   //           if (response.value && response.value.status === 200) {
-                   
-  //   //                 tasks.value= response.value.data.data;
-  //   //                 links.value= response.value.data.links;
-  //   //                 itemsPerPage.value=response.value.data.per_page; // record per page
-  //   //                 currentPage.value = response.value.data.current_page; // current page no
-  //   //                 totalPage.value = response.value.data.total; // total pages
-                  
-                   
-                   
-  //   //           } else {
-
-  //   //             err.value = true;
-  //   //             error_msg.value = response.value.response.data.message;
-  //   //           }
-  //   //         } catch (error) {
-  //   //             err.value = true;
-  //   //             console.log(error)
-  //   //             error_msg.value = response.value.response?.data?.message || error.message;
-  //   //         }
-  // }
-
-  // onMounted(async (page=1) => {
-  //   getTask(page)
-  // })
-
+  
 
 </script>
 
