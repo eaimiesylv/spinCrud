@@ -27,8 +27,8 @@
               <td>{{ (currentPage - 1) * itemsPerPage + index + 1 }}</td>
               <td>{{ task.name }}</td>
               <td>{{ task.description }}</td>
-              <td>Start Time: {{ task.start_time }}</td>
-              <td>End Time: {{ task.end_time }}</td>
+              <td> {{ task.start_time }}</td>
+              <td>{{ task.end_time }}</td>
               <td>{{ task.status }}</td>
               <td>Edit</td>
               <td>Delete</td>

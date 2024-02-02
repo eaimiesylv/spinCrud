@@ -78,6 +78,7 @@
       if (response.value) {
         loading.value = false;
         myModal.value.hide()
+        
        
        
       } else {
