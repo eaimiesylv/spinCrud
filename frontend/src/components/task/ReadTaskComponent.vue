@@ -30,7 +30,7 @@
               <td> {{ task.start_time }}</td>
               <td>{{ task.end_time }}</td>
               <td :style="{ color: getStatusColor(task.task_status) }">{{ task.task_status }}</td>
-              <td>Edit</td>
+              <td><i class="fas fa-pencil-alt" style="color:green;"  @click="showModal(task)" data-bs-target="#editModal"></i></td>
               <td><i class="fas fa-trash-alt" style="color: red;" @click="deleteTask(task.id)"></i></td>
             </tr>
         </tbody>
@@ -48,6 +48,7 @@
           </li>
         </ul>
       </div>
+      <edit-task-component :taskData="selectedTask" :closeModal="closeModal" />
       
         
       
@@ -58,7 +59,9 @@
 <script setup>
 
   import { ref, onMounted} from 'vue';
+  import { Modal } from 'bootstrap';
   import useTaskStore from '../../store/task.js';
+  import EditTaskComponent from "@/components/task/EditTaskComponent.vue";
   const tasks = ref('');
   const links = ref('');
  
@@ -68,7 +71,29 @@
   const totalPage = ref(1);
   const err = ref(false);
   const error_msg = ref('');
+  const myModal = ref('');
+  const selectedTask = ref(null);
 
+//   const resetForm = () => {
+//   formFields.value.forEach(field => {
+//     field.value = ''; // Reset the value of each form field
+//   });
+//   err.value = false; // Reset the error state
+//   error_msg.value = ''; // Reset the error message
+// };
+const closeModal = () => {
+    if (myModal.value) {
+      myModal.value.hide();
+    }
+  };
+
+  const showModal = (task)=>{
+    selectedTask.value = task;
+    myModal.value = new Modal(document.getElementById('editModal'));
+    myModal.value.show()
+    // resetForm();
+       
+  }
 
   const getFormattedLabel = (label) => {
    

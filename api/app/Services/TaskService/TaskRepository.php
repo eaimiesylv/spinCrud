@@ -11,7 +11,7 @@ class TaskRepository
 {
    public function getAllTask(){
 
-        return Task::latest('created_at')->paginate(30);
+        return Task::latest('created_at')->paginate(5);
 
    }
    public function getTaskById($task)

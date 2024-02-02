@@ -36,7 +36,7 @@ class TaskController extends Controller
             return $this->taskService->createTask($request->all());
         
     }
-    public function update(TaskFormRequest $request, Task $task)
+    public function update(Request $request, Task $task)
     { 	
            
         return $this->taskService->updateTask($request->all(), $task);

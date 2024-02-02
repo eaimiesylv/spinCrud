@@ -1,5 +1,4 @@
 import { defineStore } from 'pinia'
- import router from '../router'
 import api from '../axios';
 
 const useTaskStore = defineStore({
@@ -37,9 +36,8 @@ const useTaskStore = defineStore({
               const response = await api.post('tasks', payLoad);
         
               if (response && response.status === 201) {
-                    console.log(response.data)
+                    // console.log(response.data)
                     this.tasks.data.unshift(response.data);
-                    router.push('/dashboard')
                     return { success: true, response: 'Submisssion succesful' };
               } else {
                    console.log(response);
@@ -59,14 +57,38 @@ const useTaskStore = defineStore({
 
                         const newTasks = { ...this.tasks };
                         newTasks.data = newTasks.data.filter(task => task.id !== taskId);
-                
-                        // Update the state with the new reactive copy
                         this.tasks.data = newTasks;
                      
                     return { success: true, response: 'data deleted successfully' };
               } else {
                    console.log(response);
                     return { success: false, response: 'deletion fail' };
+              }
+            } catch (error) {
+                  console.log(error);
+                 return { success: false, response: error};
+            }
+          },
+          async editTask(payLoad,taskId) {
+          
+           
+            try {
+               
+                const response = await api.put(`tasks/${taskId}`,payLoad);
+        
+              if (response && response.status === 200) {
+
+                const index = this.tasks.data.findIndex(task => task.id === taskId);
+
+                if (index !== -1) {
+                  // Update the task with the new data
+                  this.tasks.data[index] = response.data;
+                }
+              
+                    return { success: true, response: 'data deleted successfully' };
+              } else {
+                   console.log(response);
+                    return { success: false, response: 'update fail' };
               }
             } catch (error) {
                   console.log(error);
