@@ -18,7 +18,7 @@ class Task extends Model
         'created_by',
         'id',
         'user_id',
-        'status'
+        'task_status'
     ];
 
     protected $hidden =['user_id'];
@@ -27,6 +27,7 @@ class Task extends Model
         parent::boot();
         static::creating(function ($task) {
             $task->user_id = Auth::id();
+			$task->task_status = "pending";
         });
     }
     

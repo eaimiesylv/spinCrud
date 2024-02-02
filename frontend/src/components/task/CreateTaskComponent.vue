@@ -1,8 +1,12 @@
 <template>
        <!-- Button trigger modal -->
+
       <button type="button" class="btn btn-primary mt-3"  @click="showModal()" data-bs-target="#exampleModal">
         Create Task
       </button>
+      <div v-if="err" class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+              <strong>{{ error_msg }}</strong>
+      </div>
 
       <!-- Modal -->
       <div class="modal  fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -41,15 +45,15 @@
   
   <script setup>
   import { ref } from 'vue';
-  import api from '../../axios';
   import ReusableForm from "@/components/base/ReusableForm.vue";
   import { Modal } from 'bootstrap';
+  import useTaskStore from '../../store/task.js';
 
   const loading = ref(false);
-  const error = ref(false);
+  const err = ref(false);
   const error_msg = ref('');
   const myModal = ref('');
-  const response = ref('');
+  
   const formFields = ref([
  
  { type: 'text', label: 'Task Name', databaseField: 'name', required: true },
@@ -65,37 +69,21 @@
         console.log(myModal.value);
   }
   const createTask = async () => {
-    try {
-      loading.value = true;
       const payLoad = {}; 
   
       formFields.value.forEach(field => {
         payLoad[field.databaseField] = field.value;
       })
       
-      response.value = await api.post('tasks',payLoad);
-
-      if (response.value) {
-        loading.value = false;
+      const{ success, response} = await useTaskStore().postTask(payLoad);
+      if(success){
         myModal.value.hide()
-        
        
-       
-      } else {
-        
-        error.value = true;
-        error_msg.value = response.value.response?.data?.message || response.value.message;
-        // console.log(error_msg)
-
+      }else{
+        err.value = true;
+       error_msg.value = response.data?.message || response.message;
       }
-    }
-    catch (error) {
-                error.value = true;
-                // console.log(error)
-                error_msg.value = response.value.response?.data?.message || error.message;
-    } finally {
-       loading.value = false;
-    }
+
   };
   </script>
   

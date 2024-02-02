@@ -31,7 +31,7 @@
               <td>{{ task.end_time }}</td>
               <td :style="{ color: getStatusColor(task.task_status) }">{{ task.task_status }}</td>
               <td>Edit</td>
-              <td>Delete</td>
+              <td><i class="fas fa-trash-alt" style="color: red;" @click="deleteTask(task.id)"></i></td>
             </tr>
         </tbody>
         <tbody v-else>
@@ -58,17 +58,17 @@
 <script setup>
 
   import { ref, onMounted} from 'vue';
-  // import api from '../../axios';
   import useTaskStore from '../../store/task.js';
   const tasks = ref('');
   const links = ref('');
-  // const response = ref('');
+ 
   
   const currentPage = ref(1); 
   const itemsPerPage = ref(1);
   const totalPage = ref(1);
   const err = ref(false);
   const error_msg = ref('');
+
 
   const getFormattedLabel = (label) => {
    
@@ -118,26 +118,40 @@
   }
   const getTask = async (page) => {
       page = pageNo(page);
-      //console.log(response)
       const { success, res } = await useTaskStore().fetchTask(page);
       if (success) {
-        
-        console.log(res);
-        tasks.value = res.data;
-        links.value = res.links;
-        itemsPerPage.value = res.per_page; // record per page
-        currentPage.value = res.current_page; // current page no
-        totalPage.value = res.total; // total pages
+          tasks.value = res.data;
+          links.value = res.links;
+          itemsPerPage.value = res.per_page; // record per page
+          currentPage.value = res.current_page; // current page no
+          totalPage.value = res.total; // total pages
       }
       else {
       err.value = true;
-     error_msg.value = res.data?.message || res.message;
+       error_msg.value = res.data?.message || res.message;
+
+    }
+};
+
+const deleteTask = async (taskId) => {
+      
+      const { success } = await useTaskStore().deleteTask(taskId);
+      if (success) {
+        console.log(success)
+        getTask(1)
+       
+      }
+      else {
+        //console.log(taskId);
+      //   err.value = true;
+      //  error_msg.value = response.data?.message || response.message;
 
     }
 };
 
 onMounted(async (page = 1) => {
   getTask(page);
+  
 });
   
 
