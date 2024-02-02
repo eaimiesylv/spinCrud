@@ -22,7 +22,7 @@ api.interceptors.response.use(
     
       // useAuthStore().clearAuthData();
 
-     alert("no data found")
+    
     }
     return Promise.reject(error);
   }

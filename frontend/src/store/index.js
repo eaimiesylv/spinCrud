@@ -27,13 +27,13 @@ const useAuthStore = defineStore({
                     this.token = response.data[0];
                     this.user = response.data[1];
                     this.updateLocalStorage();
-                    return { success: true, message: 'Login successful' };
+                    return { success: true, response: 'Login successful' };
               } else {
-                    return { success: false, message: 'Invalid credentials' };
+                    return { success: false, response: 'Invalid credentials' };
               }
             } catch (error) {
-              console.log(error);
-              return { success: false, message: error};
+                  console.log(error);
+                 return { success: false, response: error};
             }
           },
       
