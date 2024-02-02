@@ -47,7 +47,7 @@
    
     this.checkNavOpenClass();
     this.user = useAuthStore().user;
-    // console.log(this.user)
+   
 
   }
 }

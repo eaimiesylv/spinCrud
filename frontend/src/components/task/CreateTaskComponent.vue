@@ -13,22 +13,45 @@
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-              ...
+              <form  @submit.prevent="login">
+          
+                  <div v-if="error" class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                      <strong>{{ error_msg }}</strong>
+
+                      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+
+                  </div>
+                  <div>
+                    
+                      <ReusableForm :fields="formFields"/>
+                    
+                  </div>  
+                  <div class="d-flex justify-content-between mt-3">
+
+                      <button type="submit" class="btn btn-primary" :disabled="loading">{{ loading ? 'Please wait...' : 'Submit' }}</button>
+
+                      <h6 @click="redirectToRegister">Create an account</h6>
+                    </div>
+              </form>
             </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
+            
           </div>
         </div>
       </div>
   </template>
   
-  <script>
-  export default {
-    name: 'CreateTaskComponent',
-   
-  }
+  <script setup>
+  import { ref } from 'vue';
+  import ReusableForm from "@/components/base/ReusableForm.vue";
+  const formFields = ref([
+ 
+ { type: 'email', label: 'Task Name', databaseField: 'name', required: true },
+ { type: 'text-area', label: 'Task Description', databaseField: 'description', required: true },
+ { type: 'date', label: 'Start date', databaseField: 'start_time', required: true },
+ { type: 'date', label: 'End date', databaseField: 'end_time', required: true },
+
+
+]);
   </script>
   
   

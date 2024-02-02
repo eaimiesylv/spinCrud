@@ -15,8 +15,9 @@ return new class extends Migration
             $table->uuid('id',32)->primary();
             $table->string('name', 55);
             $table->string('description', 200);
-            $table->date('start_time');
-            $table->date('end_time');
+            $table->date('start_time', 12);
+            $table->date('end_time',12);
+            $table->string('status', 10)->default('pending');
             $table->uuid('user_id', 32)->index();
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();

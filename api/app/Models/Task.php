@@ -17,7 +17,8 @@ class Task extends Model
         'end_time',
         'created_by',
         'id',
-        'user_id'
+        'user_id',
+        'status'
     ];
 
     protected $hidden =['user_id'];
