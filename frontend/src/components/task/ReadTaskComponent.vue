@@ -74,13 +74,7 @@
   const myModal = ref('');
   const selectedTask = ref(null);
 
-//   const resetForm = () => {
-//   formFields.value.forEach(field => {
-//     field.value = ''; // Reset the value of each form field
-//   });
-//   err.value = false; // Reset the error state
-//   error_msg.value = ''; // Reset the error message
-// };
+
 const closeModal = () => {
     if (myModal.value) {
       myModal.value.hide();
@@ -91,7 +85,7 @@ const closeModal = () => {
     selectedTask.value = task;
     myModal.value = new Modal(document.getElementById('editModal'));
     myModal.value.show()
-    // resetForm();
+    
        
   }
 
