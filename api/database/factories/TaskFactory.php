@@ -12,10 +12,12 @@ class TaskFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->sentence(),
+            'name' => fake()->name(),
             'description' => fake()->text(),
             'start_time' => now(),
             'end_time' => now(),
+            'user_id' => \App\Models\User::factory(),
+        
         ];
     }
 
