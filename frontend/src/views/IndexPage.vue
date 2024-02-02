@@ -1,71 +1,77 @@
 <template>
   <main>
-    
-
     <div id="main_content" class="col-md-6 offset-md-3 mt-3">
       <img src="@/assets/logo.jpg" class="mx-auto d-block img" alt="Task Scheduler" />
-      <form @submit.prevent="login" class="mt-3">
-        <div  v-if="error" class="alert alert-danger alert-dismissible fade show" role="alert">
-          <strong>{{  error_msg }}</strong>
-          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-        <div class="mb-3">
-          <label for="exampleInputEmail1" class="form-label">Email address</label>
-          <input v-model="email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-        </div>
-        <div class="mb-3">
-          <label for="exampleInputPassword1" class="form-label">Password</label>
-          <input v-model="password" type="password" class="form-control" id="exampleInputPassword1">
-        </div>
-        <div class="d-flex ">
-          <button type="submit" class="btn btn-primary" :disabled="loading">{{ loading ? 'Please wait...' : 'Submit' }}</button>
-          <h6  @click="redirectToRegister">Click here to register an account</h6>
-      </div>
-      </form>
+      <form  @submit.prevent="login">
+          
+          <div v-if="error" class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+              <strong>{{ error_msg }}</strong>
+
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+
+          </div>
+          <div>
+             
+              <ReusableForm :fields="formFields"/>
+             
+           </div>  
+           <div class="d-flex justify-content-between mt-3">
+
+              <button type="submit" class="btn btn-primary" :disabled="loading">{{ loading ? 'Please wait...' : 'Submit' }}</button>
+
+              <h6 @click="redirectToRegister">Create an account</h6>
+            </div>
+       </form>
+      
     </div>
   </main>
 </template>
 
-<script>
+<script setup>
+import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 import useAuthStore from '../store';
+import ReusableForm from "@/components/base/ReusableForm.vue";
 
-export default {
-  name: 'IndexPage',
-  data() {
-    return {
-      email: '',
-      password: 'test*1234',
-      loading: false,
-      error:false,
-      error_msg:'',
-    };
-  },
-  methods: {
-    async login() {
-      try {
-        this.loading = true;
-        const { success, response } = await useAuthStore().login({
-          email: this.email,
-          password: this.password,
-        });
+// const email = ref('');
+// const password = ref('test*1234');
+const loading = ref(false);
+const error = ref(false);
+const error_msg = ref('');
+const router = useRouter();
 
-        if (success) {
-          this.$router.push('/dashboard');
-        } else {
-          this.error = true;
-          this.error_msg =response.response.data.message;
-         
-        }
-      } finally {
-        this.loading = false;
-      }
-    },
-    redirectToRegister() {
-      // Implement your logic to redirect to the registration page
-      console.log('Redirect to register');
-    },
-  },
+
+const formFields = ref([
+ 
+  { type: 'email', label: 'Email', databaseField: 'email', required: true },
+  { type: 'password', label: 'Password', databaseField: 'password', required: true },
+
+
+]);
+
+const login = async () => {
+  try {
+    loading.value = true;
+    const payLoad = {}; 
+ 
+    formFields.value.forEach(field => {
+      payLoad[field.databaseField] = field.value;
+    })
+    
+    const { success, response } = await useAuthStore().login(payLoad);
+
+    if (success) {
+      router.push('/dashboard');
+    } else {
+      error.value = true;
+      error_msg.value = response.response.data.message;
+    }
+  } finally {
+    loading.value = false;
+  }
 };
+
+
 </script>
 
 <style scoped>
@@ -75,5 +81,9 @@ export default {
   #main_content {
     background: white !important;
     padding: 3em;
+  }
+  h6 {
+    color: blue;
+    cursor: pointer;
   }
 </style>
