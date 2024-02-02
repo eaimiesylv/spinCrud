@@ -4,6 +4,7 @@ namespace App\Services\TaskService;
 use App\Models\Task;
 use Illuminate\Database\QueryException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\Auth;
 
 
 
@@ -11,7 +12,7 @@ class TaskRepository
 {
    public function getAllTask(){
 
-        return Task::latest('created_at')->paginate(5);
+        return Task::latest('created_at')->where('user_id', Auth::id())->paginate(5);
 
    }
    public function getTaskById($task)

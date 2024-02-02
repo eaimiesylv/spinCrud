@@ -36,7 +36,7 @@
         </tbody>
         <tbody v-else>
           <tr >
-            <td colspan="8" style="color:red"><strong>No records found </strong></td>
+            <td colspan="8" style="color:red"><strong>No task has been created </strong></td>
           </tr>
         </tbody>
       </table>
