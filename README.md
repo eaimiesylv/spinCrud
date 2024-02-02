@@ -61,6 +61,9 @@ email:test2@gmail.com
 
 password:test*1234
 
+**API Documentation**
+https://documenter.getpostman.com/view/23939553/2s9Yyti2HS
+
 **Register Page**
 
 ![image](https://github.com/eaimiesylv/spinCrud/assets/50324524/301e432b-3818-40b5-bbd6-e16c94a571f9)
