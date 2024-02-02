@@ -11,7 +11,7 @@ class TaskRepository
 {
    public function getAllTask(){
 
-        return Task::paginate(20);
+        return Task::paginate(2);
 
    }
    public function getTaskById($task)
