@@ -36,6 +36,22 @@ const useAuthStore = defineStore({
                  return { success: false, response: error};
             }
           },
+        
+          async register(payLoad) {
+            try {
+              const response = await api.post('users', payLoad);
+        
+              if (response && response.status === 201) {
+                    
+                    return { success: true, response: 'registration successful' };
+              } else {
+                    return { success: false, response: 'registration error' };
+              }
+            } catch (error) {
+                  console.log(error);
+                 return { success: false, response: error};
+            }
+          },
       
 
         clearAuthData() {

@@ -2,10 +2,16 @@
   <main>
     <div id="main_content" class="col-md-6 offset-md-3 mt-3">
       <img src="@/assets/logo.jpg" class="mx-auto d-block img" alt="Task Scheduler" />
-      <form  @submit.prevent="login">
+      <form  @submit.prevent="register">
           
           <div v-if="error" class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
               <strong>{{ error_msg }}</strong>
+
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+
+          </div>
+          <div v-if="isOk" class="alert alert-success alert-dismissible fade show mt-3" role="alert">
+              <strong>Account created successfully. <router-link  to="/">Login here</router-link></strong>
 
               <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 
@@ -17,9 +23,9 @@
            </div>  
            <div class="d-flex justify-content-between mt-3">
 
-              <button type="submit" class="btn btn-primary" :disabled="loading">{{ loading ? 'Please wait...' : 'Submit' }}</button>
+              <button type="submit" class="btn btn-primary" :disabled="loading">{{ loading ? 'Please wait...' : 'Register' }}</button>
 
-              <router-link to="/register">Create an account</router-link>
+              <router-link to="/">Login</router-link>
             </div>
        </form>
       
@@ -29,7 +35,6 @@
 
 <script setup>
 import { ref } from 'vue';
-import { useRouter } from 'vue-router';
 import useAuthStore from '../store';
 import ReusableForm from "@/components/base/ReusableForm.vue";
 
@@ -38,18 +43,21 @@ import ReusableForm from "@/components/base/ReusableForm.vue";
 const loading = ref(false);
 const error = ref(false);
 const error_msg = ref('');
-const router = useRouter();
+const isOk = ref(false)
+
 
 
 const formFields = ref([
  
-{ type: 'email', label: 'Email', databaseField: 'email', required: true ,placeholder:'Enter your email address'},
+  { type: 'text', label: 'Full name', databaseField: 'name', required: true, placeholder:'Enter your name' },
+  { type: 'email', label: 'Email', databaseField: 'email', required: true ,placeholder:'Enter your email address'},
   { type: 'password', label: 'password', databaseField: 'password', required: true ,placeholder:'Enter Password'},
+
 
 
 ]);
 
-const login = async () => {
+const register = async () => {
   try {
     loading.value = true;
     const payLoad = {}; 
@@ -58,13 +66,14 @@ const login = async () => {
       payLoad[field.databaseField] = field.value;
     })
     
-    const { success, response } = await useAuthStore().login(payLoad);
+    const { success, response } = await useAuthStore().register(payLoad);
 
     if (success) {
-      router.push('/dashboard');
+      isOk.value = true;
     } else {
       error.value = true;
       error_msg.value = response.response?.data?.message || response.message;
+      console.log(error_msg)
 
     }
   } finally {

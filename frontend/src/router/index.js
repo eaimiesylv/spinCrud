@@ -14,6 +14,14 @@ const routes = [
     component: IndexPage
   },
   {
+    path: '/register',
+    name: 'register',
+    component: function () {
+      return import( '../views/RegisterPage.vue')
+     }
+
+  },
+  {
     path: '/dashboard',
     name: 'dashboard',
     component:Dashboard,
