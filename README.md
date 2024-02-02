@@ -56,5 +56,7 @@ Apache server or any other server
 
 
 **Default login Credentials**
+
 email:test2@gmail.com
+
 password:test*1234
